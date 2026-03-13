@@ -14,15 +14,15 @@ public class Randomizer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        RandomizerObj randomizerObj = new RandomizerObj(3, 10, 1, 10, 18, 55, (float) 10000.00);
+        RandomizerObj randomizerObj = new RandomizerObj(3, 3, 1, 10, 55,
+                (float) 10000.00, RandomizerObj.FileType.CSV);
+        
         System.out.println(randomizerObj.toString());
+        //randomizerObj.printEverything();
         
-        //randomizerObj.printRandomizer();
-        randomizerObj.printHeader();
+        String test = randomizerObj.generateDataset();
         
-        for(int i = 0; i<10 ; i++){
-            randomizerObj.printRow();
-        }
+        System.out.println(test);
     }
-    
+
 }
