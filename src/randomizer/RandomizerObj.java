@@ -19,24 +19,24 @@ public class RandomizerObj {
 
     private int columns;
     private int rows;
-    private int floor;
-    private int ceiling;
-    private final int minimumAge = (int) 18;
+    private int minNumber;
+    private int maxNumber;
+    private final int minAge = (int) 18;
     private int maxAge;
-    private float maxMoney;
-    private final float minimumWage = (float) 1621.00;
+    private final float minWage = (float) 1621.00;
+    private float maxWage;
     private FileType fileType;
     private final Random random;
 
-    public RandomizerObj(int columns, int rows, int floor, int ceiling,
-            int maxAge, float maxMoney, FileType fileType) {
+    public RandomizerObj(int columns, int rows, int minNumber, int maxNumber,
+            int maxAge, float maxWage, FileType fileType) {
 
         this.columns = columns;
         this.rows = rows;
-        this.floor = floor;
-        this.ceiling = ceiling;
+        this.minNumber = minNumber;
+        this.maxNumber = maxNumber;
         this.maxAge = maxAge;
-        this.maxMoney = maxMoney;
+        this.maxWage = maxWage;
         this.fileType = fileType;
         this.random = new Random();
     }
@@ -57,8 +57,8 @@ public class RandomizerObj {
         this.rows = rows;
     }
 
-    public int getFloor() {
-        return floor;
+    public int getminNumber() {
+        return minNumber;
     }
 
     public FileType getFileType() {
@@ -69,20 +69,20 @@ public class RandomizerObj {
         this.fileType = fileType;
     }
 
-    public void setFloor(int floor) {
-        this.floor = floor;
+    public void setminNumber(int minNumber) {
+        this.minNumber = minNumber;
     }
 
-    public int getCeiling() {
-        return ceiling;
+    public int getmaxNumber() {
+        return maxNumber;
     }
 
-    public void setCeiling(int ceiling) {
-        this.ceiling = ceiling;
+    public void setmaxNumber(int maxNumber) {
+        this.maxNumber = maxNumber;
     }
 
-    public int getMinimumAge() {
-        return minimumAge;
+    public int getminAge() {
+        return minAge;
     }
 
     public int getMaxAge() {
@@ -93,21 +93,21 @@ public class RandomizerObj {
         this.maxAge = maxAge;
     }
 
-    public float getMaxMoney() {
-        return maxMoney;
+    public float getmaxWage() {
+        return maxWage;
     }
 
-    public void setMaxMoney(float maxMoney) {
-        this.maxMoney = maxMoney;
+    public void setmaxWage(float maxWage) {
+        this.maxWage = maxWage;
     }
 
-    public float getMinimumWage() {
-        return minimumWage;
+    public float getminWage() {
+        return minWage;
     }
 
     @Override
     public String toString() {
-        return "RandomizerObj{" + "columns=" + columns + ", rows=" + rows + ", floor=" + floor + ", ceiling=" + ceiling + ", minimumAge=" + minimumAge + ", maxAge=" + maxAge + ", maxMoney=" + maxMoney + '}';
+        return "RandomizerObj{" + "columns=" + columns + ", rows=" + rows + ", minNumber=" + minNumber + ", maxNumber=" + maxNumber + ", minAge=" + minAge + ", maxAge=" + maxAge + ", maxWage=" + maxWage + '}';
     }
 
     /*
@@ -117,7 +117,7 @@ public class RandomizerObj {
                 if (i == 0) {
                     System.out.printf("a%d  ", j);
                 } else {
-                    int randomNumber = random.nextInt(this.ceiling - this.floor + 1) + this.floor;
+                    int randomNumber = random.nextInt(this.maxNumber - this.minNumber + 1) + this.minNumber;
                     System.out.printf("%d  ", randomNumber);
                 }
             }
@@ -134,12 +134,12 @@ public class RandomizerObj {
     }
 
     public void printRow(String separator) {
-        int randomAge = random.nextInt(this.maxAge - this.minimumAge + 1) + this.minimumAge;
-        float randomWage = random.nextFloat(this.maxMoney - this.minimumWage + 1) + this.minimumWage;
+        int randomAge = random.nextInt(this.maxAge - this.minAge + 1) + this.minAge;
+        float randomWage = random.nextFloat(this.maxWage - this.minWage + 1) + this.minWage;
 
         System.out.printf("%d%s%.2f", randomAge, separator, randomWage);
         for (int i = 1; i <= columns; i++) {
-            int randomNumber = random.nextInt(this.ceiling - this.floor + 1) + this.floor;
+            int randomNumber = random.nextInt(this.maxNumber - this.minNumber + 1) + this.minNumber;
             System.out.printf("%s%d", separator, randomNumber);
         }
         System.out.printf("\n");
@@ -166,15 +166,15 @@ public class RandomizerObj {
 
     public String generateRow(String separator) {
         StringBuilder sb = new StringBuilder();
-        int randomAge = random.nextInt(maxAge - minimumAge + 1) + minimumAge;
-        float randomWage = random.nextFloat(maxMoney - minimumWage) + minimumWage;
+        int randomAge = random.nextInt(maxAge - minAge + 1) + minAge;
+        float randomWage = random.nextFloat(maxWage - minWage) + minWage;
 
         sb.append(randomAge)
                 .append(separator)
                 .append(String.format("%.2f", randomWage));
 
         for (int i = 1; i <= columns; i++) {
-            int randomNumber = random.nextInt(ceiling - floor + 1) + floor;
+            int randomNumber = random.nextInt(maxNumber - minNumber + 1) + minNumber;
             sb.append(separator).append(randomNumber);
         }
 

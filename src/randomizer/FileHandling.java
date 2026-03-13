@@ -4,19 +4,23 @@
  */
 package randomizer;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import randomizer.RandomizerObj.FileType;
+
 /**
  *
  * @author messi
  */
 public class FileHandling {
+
     private String name;
-    private String content;
-    private RandomizerObj randomizer;
-    
-    public FileHandling(String name, String content, RandomizerObj randomizer) {
+    private RandomizerObj randomizerObj;
+
+    public FileHandling(String name, RandomizerObj randomizerObj) {
         this.name = name;
-        this.content = content;
-        this.randomizer = randomizer;
+        this.randomizerObj = randomizerObj;
     }
 
     public String getName() {
@@ -27,19 +31,19 @@ public class FileHandling {
         this.name = name;
     }
 
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-    
-    public void saveToFile(){
-        if (this.randomizer.getFileType().equals(RandomizerObj.FileType.CSV)){
-            //savetocsv
-            return;
-        } 
-        //savetotxt
+    public void saveToFile() {
+        String fileName = name + "." + this.randomizerObj.getFileType().toString().toLowerCase();
+        System.out.println(fileName);
+        
+        String content = this.randomizerObj.generateDataset();
+        
+        Path path = Path.of(fileName);
+        try {
+            Files.writeString(path, content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 }
