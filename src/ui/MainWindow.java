@@ -155,14 +155,9 @@ public class MainWindow extends javax.swing.JFrame {
         int maxAge = Integer.parseInt(jTextField5.getText());
         float maxWage = Float.parseFloat(jTextField6.getText());
         //FileType fileType = FileType.valueOf(jTextField7.getText().toUpperCase());
-
-        FileType fileType = RandomizerObj.FileType.CSV;
         
-        RandomizerObj randomizerObj = new RandomizerObj(columns, rows, minNumber, maxNumber, maxAge, maxWage, fileType);
-        
-        FileHandling fileHandling = new FileHandling("teste", randomizerObj);
-        fileHandling.saveToFile();
-        //System.out.println("It passed here!");
+        SaveWindow saveWindow = new SaveWindow(columns, rows, minNumber, maxNumber, maxAge, maxWage);
+        saveWindow.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
