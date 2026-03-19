@@ -158,7 +158,7 @@ public class RandomizerObj {
         sb.append("idade").append(separator).append("salario");
 
         for (int i = 1; i <= columns; i++) {
-            sb.append(separator).append("coluna").append(i);
+            sb.append(separator).append("coluna ").append(i);
         }
 
         return sb.toString();
