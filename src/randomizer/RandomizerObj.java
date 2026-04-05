@@ -42,7 +42,7 @@ public class RandomizerObj {
         this.maxNumber = maxNumber;
         this.maxAge = maxAge;
         this.maxWage = maxWage;
-        this.ip = IpGenerator.generateIp();
+        this.ip = Utils.generateIp();
         this.fileType = fileType;
     }
 
@@ -109,51 +109,7 @@ public class RandomizerObj {
     public float getminWage() {
         return minWage;
     }
-    
-    /*
-    public void printRandomizer() {
-        for (int i = 0; i < rows + 1; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (i == 0) {
-                    System.out.printf("a%d  ", j);
-                } else {
-                    int randomNumber = random.nextInt(this.maxNumber - this.minNumber + 1) + this.minNumber;
-                    System.out.printf("%d  ", randomNumber);
-                }
-            }
-            System.out.printf("\n");
-        }
-    }
-     */
-    public void printHeader(String separator) {
-        System.out.printf("idade%ssalario (em R$)", separator,separator);
-        for (int i = 1; i < columns + 1; i++) {
-            System.out.printf("%scoluna %d", separator, i);
-        }
-        System.out.printf("\n");
-    }
-
-    public void printRow(String separator) {
-        int randomAge = random.nextInt(this.maxAge - this.minAge + 1) + this.minAge;
-        float randomWage = random.nextFloat(this.maxWage - this.minWage + 1) + this.minWage;
-        //TODO: put data, time and ip
-        
-        System.out.printf("%d%s%.2f", randomAge, separator, randomWage);
-        for (int i = 1; i <= columns; i++) {
-            int randomNumber = random.nextInt(this.maxNumber - this.minNumber + 1) + this.minNumber;
-            System.out.printf("%s%d", separator, randomNumber);
-        }
-        System.out.printf("\n");
-    }
-
-    public void printEverything() {
-        String separator = this.fileType.equals(FileType.CSV) ? "," : "\t";
-        this.printHeader(separator);
-        for (int i = 0; i < this.rows; i++) {
-            this.printRow(separator);
-        }
-    }
-
+   
     public String generateHeader(String separator) {
         StringBuilder sb = new StringBuilder();
         sb.append("idade").append(separator).append("salario");
@@ -167,15 +123,15 @@ public class RandomizerObj {
 
     public String generateRow(String separator) {
         StringBuilder sb = new StringBuilder();
-        int randomAge = random.nextInt(maxAge - minAge + 1) + minAge;
-        float randomWage = random.nextFloat(maxWage - minWage) + minWage;
-
+        int randomAge = Utils.generateRandomAge(this.maxAge, this.minAge);
+        float randomWage = Utils.generateRandomWage(this.maxWage, this.minWage);
+        
         sb.append(randomAge)
                 .append(separator)
                 .append(String.format("%.2f", randomWage));
 
         for (int i = 1; i <= columns; i++) {
-            int randomNumber = random.nextInt(maxNumber - minNumber + 1) + minNumber;
+            int randomNumber = Utils.generateRandomNumber(this.maxNumber, this.minNumber);
             sb.append(separator).append(randomNumber);
         }
 
