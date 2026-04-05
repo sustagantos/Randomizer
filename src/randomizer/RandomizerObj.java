@@ -4,6 +4,8 @@
  */
 package randomizer;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Random;
 
 /**
@@ -25,8 +27,11 @@ public class RandomizerObj {
     private int maxAge;
     private final float minWage = (float) 1621.00;
     private float maxWage;
+    private String ip;
     private FileType fileType;
-    private final Random random;
+    private static final Random random = new Random();
+    //static means every instance of RandomizerObj shares same Random obj
+    //final means we can't reassign the value
 
     public RandomizerObj(int columns, int rows, int minNumber, int maxNumber,
             int maxAge, float maxWage, FileType fileType) {
@@ -37,8 +42,8 @@ public class RandomizerObj {
         this.maxNumber = maxNumber;
         this.maxAge = maxAge;
         this.maxWage = maxWage;
+        this.ip = IpGenerator.generateIp();
         this.fileType = fileType;
-        this.random = new Random();
     }
 
     public int getColumns() {
@@ -104,12 +109,7 @@ public class RandomizerObj {
     public float getminWage() {
         return minWage;
     }
-
-    @Override
-    public String toString() {
-        return "RandomizerObj{" + "columns=" + columns + ", rows=" + rows + ", minNumber=" + minNumber + ", maxNumber=" + maxNumber + ", minAge=" + minAge + ", maxAge=" + maxAge + ", maxWage=" + maxWage + '}';
-    }
-
+    
     /*
     public void printRandomizer() {
         for (int i = 0; i < rows + 1; i++) {
@@ -126,7 +126,7 @@ public class RandomizerObj {
     }
      */
     public void printHeader(String separator) {
-        System.out.printf("idade%ssalario (em R$)", separator);
+        System.out.printf("idade%ssalario (em R$)", separator,separator);
         for (int i = 1; i < columns + 1; i++) {
             System.out.printf("%scoluna %d", separator, i);
         }
@@ -136,7 +136,8 @@ public class RandomizerObj {
     public void printRow(String separator) {
         int randomAge = random.nextInt(this.maxAge - this.minAge + 1) + this.minAge;
         float randomWage = random.nextFloat(this.maxWage - this.minWage + 1) + this.minWage;
-
+        //TODO: put data, time and ip
+        
         System.out.printf("%d%s%.2f", randomAge, separator, randomWage);
         for (int i = 1; i <= columns; i++) {
             int randomNumber = random.nextInt(this.maxNumber - this.minNumber + 1) + this.minNumber;
