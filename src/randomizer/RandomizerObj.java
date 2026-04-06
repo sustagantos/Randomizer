@@ -6,6 +6,8 @@ package randomizer;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -27,7 +29,7 @@ public class RandomizerObj {
     private int maxAge;
     private final float minWage = (float) 1621.00;
     private float maxWage;
-    private String ip;
+    //private String ip;
     private FileType fileType;
     private static final Random random = new Random();
     //static means every instance of RandomizerObj shares same Random obj
@@ -42,7 +44,6 @@ public class RandomizerObj {
         this.maxNumber = maxNumber;
         this.maxAge = maxAge;
         this.maxWage = maxWage;
-        this.ip = Utils.generateIp();
         this.fileType = fileType;
     }
 
@@ -109,37 +110,43 @@ public class RandomizerObj {
     public float getminWage() {
         return minWage;
     }
-   
+
     public String generateHeader(String separator) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("idade").append(separator).append("salario");
+        List<Object> values = new ArrayList<>(List.of(
+                "data", "hora", "ip", "idade", "salario"
+        ));
 
         for (int i = 1; i <= columns; i++) {
-            sb.append(separator).append("coluna ").append(i);
+            values.add("coluna " + i);
         }
 
-        return sb.toString();
+        return Utils.buildLine(values, separator);
     }
 
     public String generateRow(String separator) {
-        StringBuilder sb = new StringBuilder();
+        LocalDate randomDate = Utils.generateRandomDate(365);
+        LocalTime randomTime = Utils.generateRandomTime();
+        String ip = Utils.generateRandomIp();
         int randomAge = Utils.generateRandomAge(this.maxAge, this.minAge);
         float randomWage = Utils.generateRandomWage(this.maxWage, this.minWage);
-        
-        sb.append(randomAge)
-                .append(separator)
-                .append(String.format("%.2f", randomWage));
+
+        List<Object> values = new ArrayList<>(List.of(
+                randomDate,
+                randomTime,
+                ip,
+                randomAge,
+                String.format("%.2f", randomWage)
+        ));
 
         for (int i = 1; i <= columns; i++) {
-            int randomNumber = Utils.generateRandomNumber(this.maxNumber, this.minNumber);
-            sb.append(separator).append(randomNumber);
+            values.add(Utils.generateRandomNumber(this.maxNumber, this.minNumber));
         }
 
-        return sb.toString();
+        return Utils.buildLine(values, separator);
     }
 
     public String generateDataset() {
-        String separator = (fileType == FileType.CSV) ? "," : "\t";
+        String separator = (this.fileType == FileType.CSV) ? "," : "\t";
         StringBuilder sb = new StringBuilder();
 
         sb.append(generateHeader(separator)).append("\n");

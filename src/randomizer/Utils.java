@@ -4,7 +4,12 @@
  */
 package randomizer;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -13,7 +18,7 @@ import java.util.Random;
 public class Utils {
     private static final Random random = new Random();
     
-    public static String generateIp(){
+    public static String generateRandomIp(){
         return random.nextInt(256) + "." +
                random.nextInt(256) + "." +
                random.nextInt(256) + "." +
@@ -34,4 +39,31 @@ public class Utils {
         int randomAge = random.nextInt(maxAge - minAge + 1) + minAge;
         return randomAge;
     }
+    
+    public static LocalDate generateRandomDate(int maxNumberOfDays){
+        LocalDate now = LocalDate.now();
+        LocalDate startDate = now.minusDays(maxNumberOfDays);
+        
+        long startEpochDay = startDate.toEpochDay();
+        long endEpochDay = now.toEpochDay();
+        
+        long randomDay = ThreadLocalRandom.current()
+                .nextLong(startEpochDay, endEpochDay + 1);
+        
+        return LocalDate.ofEpochDay(randomDay);
+    }
+    
+    public static LocalTime generateRandomTime(){
+        int hour = ThreadLocalRandom.current().nextInt(0, 24);
+        int minute = ThreadLocalRandom.current().nextInt(0, 60);
+        int second = ThreadLocalRandom.current().nextInt(0, 60);
+
+        return LocalTime.of(hour, minute, second);
+    }
+    
+    public static String buildLine(List<?> values, String separator) {
+        return values.stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(separator));
+}
 }
