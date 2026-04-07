@@ -1,13 +1,15 @@
 # Build folders
 /build/
 /dist/
+/out/
 
 # NetBeans
 /nbproject/private/
 
-# Executables
+# Executables and compressed
 *.exe
 *.jar
+*.zip
 
 # Generated data
 *.csv
