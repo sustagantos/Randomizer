@@ -81,7 +81,6 @@ If you are using a terminal, go to the root and:
 dir /s /b src\*.java > sources.txt
 javac -d out @sources.txt
 jar cfe Randomizer.jar randomizer.Randomizer -C out .
-java -jar Randomizer.jar
 ```
 
 > randomizer.Randomizer is the main class
