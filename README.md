@@ -1,11 +1,13 @@
 # Randomizer
 
+
+## Overview
+
 Randomizer is a Java application designed to generate synthetic data for academic research purposes.  
 It was created to assist in building datasets quickly, especially for simulations and data analysis scenarios.
 
 The tool allows users to customize multiple parameters and automatically generates structured data with realistic attributes.
 
----
 
 ## Features
 
@@ -22,7 +24,16 @@ The tool allows users to customize multiple parameters and automatically generat
   - Random times (any hour of the day)
 - Saves to a file of choice, PDF or CSV.
 
----
+
+## Example Use Case
+
+This application is useful for:
+
+- Academic research simulations
+- Testing data pipelines
+- Practicing data analysis
+- Generating mock datasets for development
+
 
 ## How It Works
 
@@ -35,21 +46,8 @@ When you run the application:
    - Minimum and maximum random values
    - Maximum age
    - Maximum salary
-3. The application generates a dataset based on your inputs and saves to PDF or CSV
+3. The application generates a dataset based on your inputs and saves to TXT or CSV
 
----
-
-## Requirements
-
-- Java JDK 17 or higher installed
-
-Check your version with:
-
-```bash
-java -version
-```
-
----
 
 ## Project Structure
 
@@ -71,7 +69,28 @@ manifest.mf → JAR metadata (defines main class)
 - The `manifest.mf` file defines the entry point of the application when running the `.jar`.
 
 
----
+## Requirements
+
+- Java JDK 17 or higher installed
+
+Check your version with:
+
+```bash
+java -version
+```
+
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/sustagantos/randomizer
+cd randomizer
+```
+
+No external dependencies required (uses only Java standard library).
+
 
 ## Build
 
@@ -87,7 +106,6 @@ jar cfe Randomizer.jar randomizer.Randomizer -C out .
 
 If you are using an IDE like NetBeans or IntelliJ, you can build the `.jar` directly through the interface.
 
----
 
 ## Run
 
@@ -97,25 +115,12 @@ After building the `.jar`, run:
 java -jar Randomizer.jar
 ```
 
----
-
-## Example Use Case
-
-This application is useful for:
-
-- Academic research simulations
-- Testing data pipelines
-- Practicing data analysis
-- Generating mock datasets for development
-
----
-
-## Author
-
-Developed as a personal project to support academic research.
-
----
 
 ## License
 
-This project is open-source and available under the MIT License.
+MIT License
+
+
+## Author
+
+Gustavo Santos
