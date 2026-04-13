@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -29,7 +30,7 @@ public class RandomizerObj {
     private int maxAge;
     private final float minWage = (float) 1621.00;
     private float maxWage;
-    //private String ip;
+    private final int maxDate = (int) 365;
     private FileType fileType;
     private static final Random random = new Random();
     //static means every instance of RandomizerObj shares same Random obj
@@ -124,7 +125,7 @@ public class RandomizerObj {
     }
 
     public String generateRow(String separator) {
-        LocalDate randomDate = Utils.generateRandomDate(365);
+        LocalDate randomDate = Utils.generateRandomDate(this.maxDate);
         LocalTime randomTime = Utils.generateRandomTime();
         String ip = Utils.generateRandomIp();
         int randomAge = Utils.generateRandomAge(this.maxAge, this.minAge);
@@ -135,7 +136,7 @@ public class RandomizerObj {
                 randomTime,
                 ip,
                 randomAge,
-                String.format("%.2f", randomWage)
+                String.format(Locale.US, "%.2f", randomWage)
         ));
 
         for (int i = 1; i <= columns; i++) {

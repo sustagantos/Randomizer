@@ -16,54 +16,55 @@ import java.util.stream.Collectors;
  * @author messi
  */
 public class Utils {
+
     private static final Random random = new Random();
-    
-    public static String generateRandomIp(){
-        return random.nextInt(256) + "." +
-               random.nextInt(256) + "." +
-               random.nextInt(256) + "." +
-               random.nextInt(256);
+
+    public static String generateRandomIp() {
+        return random.nextInt(256) + "."
+                + random.nextInt(256) + "."
+                + random.nextInt(256) + "."
+                + random.nextInt(256);
     }
-    
-    public static int generateRandomNumber(int maxNumber, int minNumber){
+
+    public static int generateRandomNumber(int maxNumber, int minNumber) {
         int randomNumber = random.nextInt(maxNumber - minNumber + 1) + minNumber;
         return randomNumber;
     }
-    
-    public static float generateRandomWage(float maxWage, float minWage){
+
+    public static float generateRandomWage(float maxWage, float minWage) {
         float randomWage = random.nextFloat(maxWage - minWage) + minWage;
         return randomWage;
     }
-    
-    public static int generateRandomAge(int maxAge, int minAge){
+
+    public static int generateRandomAge(int maxAge, int minAge) {
         int randomAge = random.nextInt(maxAge - minAge + 1) + minAge;
         return randomAge;
     }
-    
-    public static LocalDate generateRandomDate(int maxNumberOfDays){
+
+    public static LocalDate generateRandomDate(int maxNumberOfDays) {
         LocalDate now = LocalDate.now();
         LocalDate startDate = now.minusDays(maxNumberOfDays);
-        
+
         long startEpochDay = startDate.toEpochDay();
         long endEpochDay = now.toEpochDay();
-        
+
         long randomDay = ThreadLocalRandom.current()
                 .nextLong(startEpochDay, endEpochDay + 1);
-        
+
         return LocalDate.ofEpochDay(randomDay);
     }
-    
-    public static LocalTime generateRandomTime(){
+
+    public static LocalTime generateRandomTime() {
         int hour = ThreadLocalRandom.current().nextInt(0, 24);
         int minute = ThreadLocalRandom.current().nextInt(0, 60);
         int second = ThreadLocalRandom.current().nextInt(0, 60);
 
         return LocalTime.of(hour, minute, second);
     }
-    
+
     public static String buildLine(List<?> values, String separator) {
         return values.stream()
-            .map(String::valueOf)
-            .collect(Collectors.joining(separator));
-}
+                .map(String::valueOf)
+                .collect(Collectors.joining(separator));
+    }
 }
